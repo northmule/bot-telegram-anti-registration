@@ -52,7 +52,8 @@ class Service extends AbstractActionController
      */
     public function setHookAction()
     {
-        $route = $this->getRequest()->getUri()->getPath();
+        // todo убрать
+        $route = '/telegram-bot/bot-echo';
 
         if ($this->isDisabledSet()) {
             $view = new JsonModel();
