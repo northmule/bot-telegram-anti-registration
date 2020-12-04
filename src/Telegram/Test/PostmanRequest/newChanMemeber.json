@@ -1,0 +1,35 @@
+{
+  "update_id": 606011963,
+  "message": {
+    "message_id": 37,
+    "from": {
+      "id": 818684187,
+      "is_bot": false,
+      "first_name": "Аркадий"
+    },
+    "chat": {
+      "id": -1001421051123,
+      "title": "Is Programmer",
+      "username": "isProgrammer1",
+      "type": "supergroup"
+    },
+    "date": 1606921405,
+    "new_chat_participant": {
+      "id": 818684187,
+      "is_bot": false,
+      "first_name": "Аркадий"
+    },
+    "new_chat_member": {
+      "id": 818684187,
+      "is_bot": false,
+      "first_name": "Аркадий"
+    },
+    "new_chat_members": [
+      {
+        "id": 818684187,
+        "is_bot": false,
+        "first_name": "Аркадий"
+      }
+    ]
+  }
+}

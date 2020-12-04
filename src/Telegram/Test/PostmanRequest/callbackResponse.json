@@ -1,0 +1,46 @@
+{
+  "update_id": 606011966,
+  "callback_query": {
+    "id": "2149792331123829252",
+    "from": {
+      "id": 500537532,
+      "is_bot": false,
+      "first_name": "Евгений",
+      "username": "northmule",
+      "language_code": "ru"
+    },
+    "message": {
+      "message_id": 36,
+      "from": {
+        "id": 828472701,
+        "is_bot": true,
+        "first_name": "АнтиспамБот",
+        "username": "akismetBot"
+      },
+      "chat": {
+        "id": -1001421051123,
+        "title": "Is Programmer",
+        "username": "isProgrammer1",
+        "type": "supergroup"
+      },
+      "date": 1606920816,
+      "text": "Привет! Аркадий! Скажи, кто ты?",
+      "reply_markup": {
+        "inline_keyboard": [
+          [
+            {
+              "text": "Я бот!",
+              "callback_data": "callback_answer_bot"
+            },
+            {
+              "text": "Я человек!",
+              "callback_data": "callback_answer_human"
+            }
+          ]
+        ]
+      }
+    },
+    "chat_instance": "-4985393030296315132",
+    "data": "callback_answer_human828472701"
+  }
+}

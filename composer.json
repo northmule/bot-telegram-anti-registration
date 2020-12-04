@@ -1,0 +1,39 @@
+{
+  "name": "northmule/telegram-bot-anti-registration",
+  "description": "Laravel module for creating a Telegram bot to deal with auto registration",
+  "type": "library",
+  "keywords": ["telegram", "bot", "laminas"],
+  "homepage": "https://bot.zixn.ru",
+  "version": "1.0.0",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Djo Programmer",
+      "email": "izm@zixn.ru",
+      "homepage": "https://zixn.ru",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "ext-pdo": "*",
+    "doctrine/doctrine-orm-module": "^3.1",
+    "doctrine/migrations": "^3.0",
+    "doctrine/orm": "^2.7",
+    "ramsey/uuid": "^4.1",
+    "longman/telegram-bot": "^0.64.0",
+    "laminas/laminas-router": "^3.4",
+    "laminas/laminas-mvc-console": "^1.2",
+    "laminas/laminas-mvc": "^3.1",
+    "laminas/laminas-servicemanager": "^3.4",
+    "laminas/laminas-json": "^3.1",
+    "laminas/laminas-log": "^2.13",
+    "laminas/laminas-eventmanager": "^3.3",
+    "vlucas/phpdotenv": "^5.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Coderun\\Telegram\\": "src/"
+    }
+  }
+}

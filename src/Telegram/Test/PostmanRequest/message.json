@@ -1,0 +1,26 @@
+{
+  "update_id": 606011954,
+  "message": {
+    "message_id": 18,
+    "from": {
+      "id": 1087968824,
+      "is_bot": true,
+      "first_name": "Group",
+      "username": "GroupAnonymousBot"
+    },
+    "sender_chat": {
+      "id": -1001421051123,
+      "title": "Is Programmer",
+      "username": "isProgrammer1",
+      "type": "supergroup"
+    },
+    "chat": {
+      "id": -1001421051123,
+      "title": "Is Programmer",
+      "username": "isProgrammer1",
+      "type": "supergroup"
+    },
+    "date": 1606914658,
+    "text": "Собщение в группу"
+  }
+}
