@@ -15,7 +15,6 @@ composer require northmule/telegram-bot-anti-registration
         'apiKey' => '', //  Токен можно узнать/создать через @BotFather
         'botUsername' => '',
         'bootHookUrl' => 'https://exemple.ru', //Внешний адрес куда должны поступать запросы от Телеграм
-        'commandsPath' => [__DIR__.'/../src/Telegram/Commands'], // Папки к командам
         'logger' => [
             'telegramLog' => '', // Путь до файла логов запросов Телеграм
             'fileLog' => '', // Путь до файла логов ошибок
@@ -26,5 +25,5 @@ composer require northmule/telegram-bot-anti-registration
 
 ```
 ### Стандартные маршруты
-1. https://exemple.ru/telegram-bot/set-hook - Режим настройки
+1. https://exemple.ru/telegram-bot/set-hook - Режим настройки (должен быть включен)
 2. https://exemple.ru/telegram-bot/bot-echo - Приёмник запросов с сервиса Telegram
