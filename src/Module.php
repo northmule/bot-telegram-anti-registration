@@ -32,11 +32,11 @@ class Module implements ConfigProviderInterface
     {
         $config = array_merge(
             [],
-            require __DIR__.'/config/module.config.php',
-            require __DIR__.'/config/routes.config.php',
-            require __DIR__.'/config/telegrambot.config.php',
-            require __DIR__.'/config/view.config.php',
-            require __DIR__.'/config/doctrine.config.php'
+            require __DIR__.'/../config/module.config.php',
+            require __DIR__.'/../config/routes.config.php',
+            require __DIR__.'/../config/telegrambot.config.php',
+            require __DIR__.'/../config/view.config.php',
+            require __DIR__.'/../config/doctrine.config.php'
         );
         
         return $config;

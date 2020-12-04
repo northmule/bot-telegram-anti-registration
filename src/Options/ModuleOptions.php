@@ -13,6 +13,8 @@ class ModuleOptions extends AbstractOptions
     protected $commandsPath;
     protected $telegramLog;
     protected $fileLog;
+    protected $logger;
+    protected $disableRouteSet;
     
     /**
      * Get apiKey
@@ -149,6 +151,52 @@ class ModuleOptions extends AbstractOptions
     public function setFileLog($fileLog): ModuleOptions
     {
         $this->fileLog = $fileLog;
+        return $this;
+    }
+    
+    /**
+     * Get logger
+     *
+     * @return mixed
+     */
+    public function getLogger()
+    {
+        return $this->logger;
+    }
+    
+    /**
+     * Set logger
+     *
+     * @param mixed $logger
+     *
+     * @return ModuleOptions
+     */
+    public function setLogger($logger): ModuleOptions
+    {
+        $this->logger = $logger;
+        return $this;
+    }
+    
+    /**
+     * Get disableRouteSet
+     *
+     * @return mixed
+     */
+    public function getDisableRouteSet()
+    {
+        return $this->disableRouteSet;
+    }
+    
+    /**
+     * Set disableRouteSet
+     *
+     * @param mixed $disableRouteSet
+     *
+     * @return ModuleOptions
+     */
+    public function setDisableRouteSet($disableRouteSet): ModuleOptions
+    {
+        $this->disableRouteSet = $disableRouteSet;
         return $this;
     }
     
