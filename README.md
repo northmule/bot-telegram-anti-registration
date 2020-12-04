@@ -2,6 +2,11 @@
 
 #### Реализация в структуре приложения Laminas здесь [GitHub](https://github.com/northmule/telegram-antisapm-registrations-bot)
 
+### Установка
+```
+composer require northmule/telegram-bot-anti-registration
+```
+
 ### Настроки
 1. Переназначить массив настроек модуля в глобальном приложении
 ```
