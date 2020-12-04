@@ -4,7 +4,6 @@
   "type": "library",
   "keywords": ["telegram", "bot", "laminas"],
   "homepage": "https://bot.zixn.ru",
-  "version": "1.0.0",
   "license": "MIT",
   "authors": [
     {
