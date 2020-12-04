@@ -18,9 +18,6 @@ class Bot implements FactoryInterface
     {
         /** @var \Northmule\Telegram\Options\ModuleOptions $options */
         $options = $container->get(ModuleOptions::class);
-        $config = $container->get('config');
-        /** @var \Doctrine\ORM\EntityManager $entityManager */
-        $entityManager = $container->get('doctrine.entitymanager.orm_default');
         /** @var \Laminas\Form\FormElementManager\FormElementManagerV3Polyfill $formManager */
         $serviceManager = $container->get('ServiceManager');
         $logger = new Logger();
@@ -37,7 +34,6 @@ class Bot implements FactoryInterface
     
     
         $class = new BotController(
-            $entityManager,
             $serviceManager,
             $logger,
             $telegram

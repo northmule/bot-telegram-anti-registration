@@ -16,9 +16,6 @@
   "require": {
     "php": ">=7.4",
     "ext-pdo": "*",
-    "doctrine/doctrine-orm-module": "^3.1",
-    "doctrine/migrations": "^3.0",
-    "doctrine/orm": "^2.7",
     "ramsey/uuid": "^4.1",
     "longman/telegram-bot": "^0.64.0",
     "laminas/laminas-router": "^3.4",

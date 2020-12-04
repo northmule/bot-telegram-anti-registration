@@ -9,7 +9,6 @@ use Laminas\Json\Json;
 use Laminas\Mvc\Controller\AbstractController;
 use Laminas\Mvc\MvcEvent;
 use Laminas\ServiceManager\ServiceManager;
-use Doctrine\ORM\EntityManager;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\JsonModel;
 use Northmule\Telegram\Options\ModuleOptions;
@@ -19,11 +18,6 @@ use Longman\TelegramBot\Telegram;
 class Service extends AbstractActionController
 {
     
-    /**
-     * Entity manager.
-     * @var Doctrine\ORM\EntityManager
-     */
-    private $entityManager;
     
     /**
      * @var ServiceManager
@@ -34,14 +28,11 @@ class Service extends AbstractActionController
     /**
      * Categorys constructor.
      *
-     * @param EntityManager                $entityManager
      * @param ServiceManager               $serviceManager
      */
     public function __construct(
-        EntityManager $entityManager,
         ServiceManager $serviceManager)
     {
-        $this->entityManager = $entityManager;
         $this->serviceManager = $serviceManager;
         
     }

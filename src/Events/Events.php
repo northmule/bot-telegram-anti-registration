@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Northmule\Telegram\Events;
 
-use Doctrine\ORM\EntityManager;
 use Laminas\EventManager\Event;
 use Laminas\EventManager\EventManager;
 use Laminas\Log\Logger;
@@ -14,7 +13,6 @@ use Longman\TelegramBot\Entities\Message;
 use Longman\TelegramBot\Entities\User;
 use Longman\TelegramBot\Entities\User as UserEntities;
 use Longman\TelegramBot\Request;
-use Northmule\Telegram\Entity\UsersChat;
 use Northmule\Telegram\Map\Events as EventsMap;
 use Northmule\Telegram\Map\QuestionKeyboard;
 use Northmule\Telegram\Service\KeybordQuestion;
@@ -29,10 +27,6 @@ class Events
      */
     protected $serviceManager;
     
-    /**
-     * @var EntityManager
-     */
-    protected $entityManager;
     
     /**
      * @var Logger
@@ -43,15 +37,12 @@ class Events
      * Events constructor.
      *
      * @param ServiceManager $serviceManager
-     * @param EntityManager  $entityManager
      */
     public function __construct(
-        EntityManager $entityManager,
         ServiceManager $serviceManager,
         Logger $logger
     ) {
         $this->serviceManager = $serviceManager;
-        $this->entityManager = $entityManager;
         $this->logger = $logger;
     }
     
@@ -170,66 +161,6 @@ class Events
         
     }
     
-    public function addUserToTable(Event $event):void
-    {
-        $message = $event->getParam('message',null);
-        $members = $event->getParam('members',[]);
-        
-        if (!($message instanceof Message)) {
-            return;
-        }
-        /** @var UserEntities $user */
-        $user = reset($members);
-        if (!($user instanceof UserEntities)) {
-            return;
-        }
-        
-        try {
-            $userChat = new UsersChat();
-            $userChat->setApproved(false);
-            $userChat->setChatId($message->getChat()->getId());
-            $userChat->setChatName($message->getChat()->getUsername()??'');
-            $userChat->setLanguageCode($user->getLanguageCode()??'');
-            $userChat->setUserId($user->getId());
-            $userChat->setUserName($user->getUsername()??'');
-            $this->entityManager->persist($userChat);
-            $this->entityManager->flush();
-        } catch (\Exception $e) {
-            $this->logger->err($e->getMessage(),$e->getTrace());
-            return;
-        }
+  
 
-    }
-    
-    public function updateUserToTable(Event $event):void
-    {
-
-        $message = $event->getParam('message',null);
-        $user = $event->getParam('user',null);
-        
-        if (!($message instanceof Message)) {
-            $this->logger->info(sprintf('Процесс обработки события %s, ожидается объект %s',EventsMap::THE_NEW_USER_ANSWERED_CORRECTLY,Message::class));
-            return;
-        }
-        
-        if (!($user instanceof UserEntities)) {
-            $this->logger->info(sprintf('Процесс обработки события %s, ожидается объект %s',EventsMap::THE_NEW_USER_ANSWERED_CORRECTLY,UserEntities::class));
-    
-            return;
-        }
-        try {
-            $repository = $this->entityManager->getRepository(UsersChat::class);
-            $userChat = $repository->findOneBy(['userId' => $user->getId(),'chatId' => $message->getChat()->getId()],['id'=> 'DESC']);
-            if (!($userChat instanceof UsersChat)) {
-                return;
-            }
-            $userChat->setApproved(true);
-            $this->entityManager->persist($userChat);
-            $this->entityManager->flush();
-        } catch (\Exception $e) {
-            $this->logger->err($e->getMessage(),$e->getTrace());
-            return;
-        }
-        
-    }
 }

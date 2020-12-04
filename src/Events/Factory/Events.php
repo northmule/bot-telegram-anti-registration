@@ -13,8 +13,7 @@ class Events implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        /** @var \Doctrine\ORM\EntityManager $entityManager */
-        $entityManager = $container->get('doctrine.entitymanager.orm_default');
+
         /** @var \Laminas\Form\FormElementManager\FormElementManagerV3Polyfill $formManager */
         $serviceManager = $container->get('ServiceManager');
         /** @var \Northmule\Telegram\Options\ModuleOptions $options */
@@ -24,6 +23,6 @@ class Events implements FactoryInterface
             $logger->addWriter(new \Laminas\Log\Writer\Stream($options->getFileLog()));
         }
 
-        return new EventsService($entityManager,$serviceManager,$logger);
+        return new EventsService($serviceManager,$logger);
     }
 }

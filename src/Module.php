@@ -23,8 +23,6 @@ class Module implements ConfigProviderInterface
         $eventManager = $e->getApplication()->getServiceManager()->get(EventManager::class);
         $eventManager->attach(EventsMap::NEW_USER_CREATED_AN_ANSWER_VERIFICATION_QUESTION,[$eventsService,'checkUsersResponse']);
         $eventManager->attach(EventsMap::NEW_USER_SENT_REQUEST_TO_JOIN_GROUP,[$eventsService,'processRequestToJoinGroup']);
-        $eventManager->attach(EventsMap::NEW_USER_SENT_REQUEST_TO_JOIN_GROUP,[$eventsService,'addUserToTable']);
-        $eventManager->attach(EventsMap::THE_NEW_USER_ANSWERED_CORRECTLY,[$eventsService,'updateUserToTable']);
 
     }
     

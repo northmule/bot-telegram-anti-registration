@@ -11,7 +11,6 @@ use Laminas\Log\Logger;
 use Laminas\Mvc\Controller\AbstractController;
 use Laminas\Mvc\MvcEvent;
 use Laminas\ServiceManager\ServiceManager;
-use Doctrine\ORM\EntityManager;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
@@ -22,11 +21,6 @@ use Northmule\Telegram\Options\ModuleOptions;
 class Bot extends AbstractActionController
 {
     
-    /**
-     * Entity manager.
-     * @var Doctrine\ORM\EntityManager
-     */
-    private $entityManager;
     
     /**
      * @var ServiceManager
@@ -47,17 +41,15 @@ class Bot extends AbstractActionController
     /**
      * Categorys constructor.
      *
-     * @param EntityManager                $entityManager
+
      * @param ServiceManager               $serviceManager
      */
     public function __construct(
-        EntityManager $entityManager,
         ServiceManager $serviceManager,
         Logger $logger,
         TelegramApi $telegram
     )
     {
-        $this->entityManager = $entityManager;
         $this->serviceManager = $serviceManager;
         $this->logger = $logger;
         $this->telegram = $telegram;
