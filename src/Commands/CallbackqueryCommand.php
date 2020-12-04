@@ -7,7 +7,6 @@ namespace Northmule\Telegram\Commands;
 
 use Northmule\Telegram\Service\TelegramApi;
 use Laminas\EventManager\EventManager;
-use Laminas\ModuleManager\Listener\ServiceListenerInterface;
 use Longman\TelegramBot\Commands\SystemCommand;
 use Longman\TelegramBot\Request;
 use Northmule\Telegram\Map\Events;
