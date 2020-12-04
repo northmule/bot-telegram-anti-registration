@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Northmule\Telegram\Service\Factory;
 
 
+use Laminas\Log\Logger;
 use Northmule\Telegram\Options\ModuleOptions;
 use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;
@@ -24,6 +25,13 @@ class TelegramApi implements FactoryInterface
         
         $telegram = new TelegramApiService($options->getApiKey(),$options->getBotUsername());
         $telegram->setServiceManager($container);
+    
+        $options = $container->get(ModuleOptions::class);
+        $logger = new Logger();
+        if ($options->getFileLog()) {
+            $logger->addWriter(new \Laminas\Log\Writer\Stream($options->getFileLog()));
+            $telegram->setLogger($logger);
+        }
         
         return $telegram;
         

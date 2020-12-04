@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Northmule\Telegram\Service;
 
+use Laminas\Log\Logger;
 use Laminas\ServiceManager\ServiceManager;
 use Longman\TelegramBot\Telegram;
 
@@ -20,6 +21,10 @@ class TelegramApi extends Telegram
      * @var ServiceManager
      */
     protected $serviceManager;
+    /**
+     * @var Logger
+     */
+    protected $logger;
     
     public function __construct($api_key, $bot_username = '')
     {
@@ -46,6 +51,29 @@ class TelegramApi extends Telegram
     public function setServiceManager(ServiceManager $serviceManager
     ): TelegramApi {
         $this->serviceManager = $serviceManager;
+        return $this;
+    }
+    
+    /**
+     * Get logger
+     *
+     * @return Logger
+     */
+    public function getLogger(): Logger
+    {
+        return $this->logger;
+    }
+    
+    /**
+     * Set logger
+     *
+     * @param Logger $logger
+     *
+     * @return TelegramApi
+     */
+    public function setLogger(Logger $logger): TelegramApi
+    {
+        $this->logger = $logger;
         return $this;
     }
     
