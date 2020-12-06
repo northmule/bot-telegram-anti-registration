@@ -15,8 +15,6 @@
   ],
   "require": {
     "php": ">=7.4",
-    "ext-pdo": "*",
-    "ramsey/uuid": "^4.1",
     "longman/telegram-bot": "^0.64.0",
     "laminas/laminas-router": "^3.4",
     "laminas/laminas-mvc-console": "^1.2",
@@ -25,7 +23,6 @@
     "laminas/laminas-json": "^3.1",
     "laminas/laminas-log": "^2.13",
     "laminas/laminas-eventmanager": "^3.3",
-    "vlucas/phpdotenv": "^5.2"
   },
   "autoload": {
     "psr-4": {
