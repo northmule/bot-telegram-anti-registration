@@ -48,3 +48,4 @@ composer require northmule/telegram-bot-anti-registration
 - [Laminas](https://getlaminas.org/)
 - [PHP Telegram CORE](https://github.com/php-telegram-bot/core)
 - [TelegramAPI](https://core.telegram.org/)
+- [Статья на Habre с описанием разработки](https://habr.com/ru/post/531790/)
