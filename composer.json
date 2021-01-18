@@ -1,6 +1,6 @@
 {
   "name": "northmule/telegram-bot-anti-registration",
-  "description": "Laravel module for creating a Telegram bot to deal with auto registration",
+  "description": "Laminas module for creating a Telegram bot to deal with auto registration",
   "type": "library",
   "keywords": ["telegram", "bot", "laminas"],
   "homepage": "https://bot.zixn.ru",
