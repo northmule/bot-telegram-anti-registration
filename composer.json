@@ -22,7 +22,7 @@
     "laminas/laminas-servicemanager": "^3.4",
     "laminas/laminas-json": "^3.1",
     "laminas/laminas-log": "^2.13",
-    "laminas/laminas-eventmanager": "^3.3",
+    "laminas/laminas-eventmanager": "^3.3"
   },
   "autoload": {
     "psr-4": {
