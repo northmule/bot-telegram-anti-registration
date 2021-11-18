@@ -11,7 +11,7 @@ return [
             Northmule\Telegram\Service\TelegramApi::class => Northmule\Telegram\Service\Factory\TelegramApi::class,
         ],
         'invokables' => [
-            Northmule\Telegram\Service\KeybordQuestion::class => Northmule\Telegram\Service\KeybordQuestion::class,
+            Northmule\Telegram\Service\KeyboardQuestion::class => Northmule\Telegram\Service\KeyboardQuestion::class,
             Northmule\Telegram\Service\TelegramRestrict::class => Northmule\Telegram\Service\TelegramRestrict::class,
             Laminas\EventManager\EventManager::class => Laminas\EventManager\EventManager::class
 

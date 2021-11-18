@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Northmule\Telegram\Service;
 
+use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Request;
 
 /**
@@ -12,8 +13,8 @@ use Longman\TelegramBot\Request;
  * Общие разрешения на группу остаются приоритетными
  * Class TelegramRestrict
  *
- * @see https://core.telegram.org/bots/api#chatpermissions
- * @see https://core.telegram.org/bots/api#restrictchatmember
+ * @see     https://core.telegram.org/bots/api#chatpermissions
+ * @see     https://core.telegram.org/bots/api#restrictchatmember
  *
  * @package Northmule\Telegram\Service
  */
@@ -22,25 +23,26 @@ class TelegramRestrict
     
     /**
      * Запретить пользователю в чате любые действия
+     *
      * @param int $chatId
      * @param int $userId
      *
-     * @return \Longman\TelegramBot\Entities\ServerResponse
+     * @return ServerResponse
      */
-    public function setRestrict(int $chatId, int $userId)
+    public function setRestrict(int $chatId, int $userId): ServerResponse
     {
-       return Request::restrictChatMember([
-            'chat_id' => $chatId,
-            'user_id' => $userId,
+        return Request::restrictChatMember([
+            'chat_id'     => $chatId,
+            'user_id'     => $userId,
             'permissions' => [
-                'can_send_messages' => false, // Отправка сообщений
-                'can_send_media_messages' => false,
-                'can_send_polls' => false,
-                'can_send_other_messages' => false,
+                'can_send_messages'         => false, // Отправка сообщений
+                'can_send_media_messages'   => false,
+                'can_send_polls'            => false,
+                'can_send_other_messages'   => false,
                 'can_add_web_page_previews' => false,
-                'can_change_info' => false,
-                'can_invite_users' => false,
-                'can_pin_messages' => false,
+                'can_change_info'           => false,
+                'can_invite_users'          => false,
+                'can_pin_messages'          => false,
             ],
         ]);
     }
@@ -51,23 +53,24 @@ class TelegramRestrict
      * @param int $chatId
      * @param int $userId
      *
-     * @return \Longman\TelegramBot\Entities\ServerResponse
+     * @return ServerResponse
      */
-    public function unsetRestrict(int $chatId, int $userId)
+    public function unsetRestrict(int $chatId, int $userId): ServerResponse
     {
         return Request::restrictChatMember([
-            'chat_id' => $chatId,
-            'user_id' => $userId,
+            'chat_id'     => $chatId,
+            'user_id'     => $userId,
             'permissions' => [
-                'can_send_messages' => true,
-                'can_send_media_messages' => true,
-                'can_send_polls' => true,
-                'can_send_other_messages' => true,
+                'can_send_messages'         => true,
+                'can_send_media_messages'   => true,
+                'can_send_polls'            => true,
+                'can_send_other_messages'   => true,
                 'can_add_web_page_previews' => true,
-                'can_change_info' => true,
-                'can_invite_users' => true,
-                'can_pin_messages' => true,
+                'can_change_info'           => true,
+                'can_invite_users'          => true,
+                'can_pin_messages'          => true,
             ],
         ]);
     }
+    
 }

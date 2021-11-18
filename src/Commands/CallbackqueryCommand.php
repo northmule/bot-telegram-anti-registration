@@ -4,27 +4,32 @@ declare(strict_types=1);
 
 namespace Northmule\Telegram\Commands;
 
-
-use Northmule\Telegram\Service\TelegramApi;
+use Exception;
 use Laminas\EventManager\EventManager;
 use Longman\TelegramBot\Commands\SystemCommand;
+use Longman\TelegramBot\Entities\CallbackQuery;
+use Longman\TelegramBot\Entities\Message;
+use Longman\TelegramBot\Entities\ServerResponse;
+use Longman\TelegramBot\Entities\User;
 use Longman\TelegramBot\Request;
 use Northmule\Telegram\Map\Events;
-
+use Northmule\Telegram\Service\TelegramApi;
 
 
 class CallbackqueryCommand extends SystemCommand
 {
-
-    /**
-     * @var string
-     */
-    protected $name = 'callbackquery';
+    
+    const NAME_COMMAND = 'callbackquery';
     
     /**
      * @var string
      */
-    protected $description = 'Сообщение с кнопки приветсвия';
+    protected $name = self::NAME_COMMAND;
+    
+    /**
+     * @var string
+     */
+    protected $description = 'Сообщение с кнопки приветствия';
     
     /**
      * @var string
@@ -39,28 +44,29 @@ class CallbackqueryCommand extends SystemCommand
      */
     public function execute(): ServerResponse
     {
-        /** @var TelegramApi $this->telegram */
-        /** @var \Laminas\EventManager\EventManager $eventManager */
-        $eventManager = $this->telegram->getServiceManager()->get(EventManager::class);
-        /** @var \Longman\TelegramBot\Entities\CallbackQuery $callback */
+        /** @var TelegramApi $this- >telegram */
+        /** @var EventManager $eventManager */
+        $eventManager = $this->telegram->getServiceManager()->get(
+            EventManager::class
+        );
         $callback = $this->getCallbackQuery();
-        /** @var \Longman\TelegramBot\Entities\Message $message */
         $message = $callback->getMessage();
-        /** @var \Longman\TelegramBot\Entities\User $user */
         $user = $callback->getFrom();
-
+        
         try {
             $eventManager->trigger(
                 Events::NEW_USER_CREATED_AN_ANSWER_VERIFICATION_QUESTION,
                 null,
-                ['message' => $message,'user' => $user,'callback' => $callback]
+                ['message' => $message, 'user' => $user,
+                 'callback' => $callback]
             );
-        } catch (\Exception $e) {
-            $this->telegram->getLogger()->err($e->getMessage(),$e->getTrace());
+        } catch (Exception $e) {
+            $this->telegram->getLogger()->err($e->getMessage(), $e->getTrace());
         }
-       
+        
         
         return Request::emptyResponse();
         
     }
+    
 }

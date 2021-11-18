@@ -20,11 +20,12 @@ class TelegramApi extends Telegram
     /**
      * @var ServiceManager
      */
-    protected $serviceManager;
+    protected ServiceManager $serviceManager;
+    
     /**
      * @var Logger
      */
-    protected $logger;
+    protected Logger $logger;
     
     public function __construct($api_key, $bot_username = '')
     {
@@ -76,8 +77,6 @@ class TelegramApi extends Telegram
         $this->logger = $logger;
         return $this;
     }
-    
-
     
     
 }

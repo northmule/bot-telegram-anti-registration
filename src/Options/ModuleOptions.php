@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Northmule\Telegram\Options;
@@ -7,13 +8,21 @@ use Laminas\Stdlib\AbstractOptions;
 
 class ModuleOptions extends AbstractOptions
 {
+    
     protected $apiKey;
+    
     protected $botUsername;
+    
     protected $bootHookUrl;
+    
     protected $commandsPath;
+    
     protected $telegramLog;
+    
     protected $fileLog;
+    
     protected $logger;
+    
     protected $disableRouteSet;
     
     /**
@@ -199,8 +208,6 @@ class ModuleOptions extends AbstractOptions
         $this->disableRouteSet = $disableRouteSet;
         return $this;
     }
-    
-    
     
     
 }

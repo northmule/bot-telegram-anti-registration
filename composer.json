@@ -15,7 +15,7 @@
   ],
   "require": {
     "php": ">=7.4",
-    "longman/telegram-bot": "^0.64.0",
+    "longman/telegram-bot": "^0.74.0",
     "laminas/laminas-router": "^3.4",
     "laminas/laminas-mvc-console": "^1.2",
     "laminas/laminas-mvc": "^3.1",

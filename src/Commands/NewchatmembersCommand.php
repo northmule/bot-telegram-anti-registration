@@ -1,14 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Northmule\Telegram\Commands;
 
-use Northmule\Telegram\Service\TelegramApi;
 use Laminas\EventManager\EventManager;
+use Laminas\ServiceManager\ServiceManager;
 use Longman\TelegramBot\Commands\SystemCommand;
+use Longman\TelegramBot\Entities\Message;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Exception\TelegramException;
-use Northmule\Telegram\Map\Events;
 use Longman\TelegramBot\Request;
+use Northmule\Telegram\Map\Events;
+use Northmule\Telegram\Service\TelegramApi;
 
 
 /**
@@ -19,10 +23,13 @@ use Longman\TelegramBot\Request;
  */
 class NewchatmembersCommand extends SystemCommand
 {
+    /** @var string  */
+    const NAME_COMMAND = 'newchatmembers';
+    
     /**
      * @var string
      */
-    protected $name = 'newchatmembers';
+    protected $name = self::NAME_COMMAND;
     
     /**
      * @var string
@@ -42,21 +49,20 @@ class NewchatmembersCommand extends SystemCommand
      */
     public function execute(): ServerResponse
     {
-        /** @var TelegramApi $this->telegram */
-        /** @var \Laminas\EventManager\EventManager $eventManager */
-        $eventManager = $this->telegram->getServiceManager()->get(EventManager::class);
-        /** @var \Laminas\ServiceManager\ServiceManager $serviceManager */
-        /** @var \Longman\TelegramBot\Entities\Message $message */
+        /** @var EventManager $eventManager */
+        $eventManager = $this->telegram->getServiceManager()->get(
+            EventManager::class
+        );
         $message = $this->getMessage();
         /** @var array $members */
         $members = $message->getNewChatMembers();
-    
+        
         $eventManager->trigger(
             Events::NEW_USER_SENT_REQUEST_TO_JOIN_GROUP,
             null,
-            ['message' => $message,'members' => $members]
+            ['message' => $message, 'members' => $members]
         );
-    
+        
         return Request::emptyResponse();
     }
     
