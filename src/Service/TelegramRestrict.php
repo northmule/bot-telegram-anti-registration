@@ -20,7 +20,7 @@ use Longman\TelegramBot\Request;
  */
 class TelegramRestrict
 {
-    
+
     /**
      * Запретить пользователю в чате любые действия
      *
@@ -46,7 +46,7 @@ class TelegramRestrict
             ],
         ]);
     }
-    
+
     /**
      * Установка всех разрешений для пользователя в true
      *
@@ -72,5 +72,4 @@ class TelegramRestrict
             ],
         ]);
     }
-    
 }

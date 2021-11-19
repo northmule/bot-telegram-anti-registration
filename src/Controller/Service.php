@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Northmule\Telegram\Controller;
 
-
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\ServiceManager\ServiceManager;
 use Laminas\View\Model\JsonModel;
@@ -12,17 +11,17 @@ use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Telegram;
 use Northmule\Telegram\Options\ModuleOptions;
 
+use function rtrim;
 
 class Service extends AbstractActionController
 {
-    
-    
+
+
     /**
      * @var ServiceManager
      */
     protected ServiceManager $serviceManager;
-    
-    
+
     /**
      * Categorys constructor.
      *
@@ -32,19 +31,18 @@ class Service extends AbstractActionController
         ServiceManager $serviceManager
     ) {
         $this->serviceManager = $serviceManager;
-        
     }
-    
+
     /**
      * Запрос на установку хука для запросов от Телеграм
      *
      * @return JsonModel
      */
-    public function setHookAction()
+    public function setHookAction(): JsonModel
     {
         // todo убрать
         $route = '/telegram-bot/bot-echo';
-        
+
         if ($this->isDisabledSet()) {
             $view = new JsonModel();
             $view->setVariables(
@@ -55,20 +53,20 @@ class Service extends AbstractActionController
             $this->getResponse()->setHeaders(
                 $headers->addHeaders(['Content-Type' => 'application/json'])
             );
-            
+
             return $view;
         }
-        
+
         /** @var ModuleOptions $options */
         $options = $this->serviceManager->get(ModuleOptions::class);
         $viewResult = '';
         try {
             $telegram = new Telegram(
-                $options->getApiKey(), $options->getBotUsername()
+                $options->getApiKey(),
+                $options->getBotUsername()
             );
-            $result = $telegram->setWebhook(
-                $options->getBootHookUrl() . $route
-            );
+            $url = rtrim($options->getBootHookUrl(), '/') . $route;
+            $result = $telegram->setWebhook($url);
             if ($result->isOk()) {
                 $viewResult = $result->getDescription();
             }
@@ -84,12 +82,11 @@ class Service extends AbstractActionController
             $this->getResponse()->setHeaders(
                 $headers->addHeaders(['Content-Type' => 'application/json'])
             );
-            
+
             return $view;
         }
-        
     }
-    
+
     /**
      * Отключен ли метод установки Хука
      *
@@ -98,14 +95,12 @@ class Service extends AbstractActionController
     protected function isDisabledSet()
     {
         $config = $this->serviceManager->get('config');
-        
+
         if (!array_key_exists('disableRouteSet', $config['telegramBot'])) {
             return true;
         }
-        
-        $isDisable = (boolean)$config['telegramBot']['disableRouteSet'];
+
+        $isDisable = (bool) $config['telegramBot']['disableRouteSet'];
         return $isDisable;
     }
-    
-    
 }

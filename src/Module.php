@@ -16,7 +16,7 @@ use Northmule\Telegram\Map\Events as EventsMap;
  */
 class Module implements ConfigProviderInterface
 {
-    
+
     public function onBootstrap(MvcEvent $e)
     {
         /** @var Events $eventsService */
@@ -34,9 +34,12 @@ class Module implements ConfigProviderInterface
             EventsMap::NEW_USER_SENT_REQUEST_TO_JOIN_GROUP,
             [$eventsService, 'processRequestToJoinGroup']
         );
-        
+        $eventManager->attach(
+            EventsMap::NEW_CHAT_MESSAGE_FROM_A_USER,
+            [$eventsService, 'checkingUserForHumanity']
+        );
     }
-    
+
     public function getConfig()
     {
         $config = array_merge(
@@ -47,8 +50,7 @@ class Module implements ConfigProviderInterface
             require __DIR__ . '/../config/view.config.php',
             require __DIR__ . '/../config/doctrine.config.php'
         );
-        
+
         return $config;
     }
-    
 }

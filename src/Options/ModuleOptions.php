@@ -8,23 +8,20 @@ use Laminas\Stdlib\AbstractOptions;
 
 class ModuleOptions extends AbstractOptions
 {
-    
+
     protected $apiKey;
-    
     protected $botUsername;
-    
     protected $bootHookUrl;
-    
     protected $commandsPath;
-    
     protected $telegramLog;
-    
     protected $fileLog;
-    
     protected $logger;
-    
     protected $disableRouteSet;
-    
+    protected $showGreetingAfterResponse;
+    protected $textOfGreeting;
+    protected $textQuestion;
+    protected $askQuestions;
+
     /**
      * Get apiKey
      *
@@ -34,7 +31,7 @@ class ModuleOptions extends AbstractOptions
     {
         return $this->apiKey;
     }
-    
+
     /**
      * Set apiKey
      *
@@ -47,7 +44,7 @@ class ModuleOptions extends AbstractOptions
         $this->apiKey = $apiKey;
         return $this;
     }
-    
+
     /**
      * Get botUsername
      *
@@ -57,7 +54,7 @@ class ModuleOptions extends AbstractOptions
     {
         return $this->botUsername;
     }
-    
+
     /**
      * Set botUsername
      *
@@ -70,7 +67,7 @@ class ModuleOptions extends AbstractOptions
         $this->botUsername = $botUsername;
         return $this;
     }
-    
+
     /**
      * Get bootHookUrl
      *
@@ -80,7 +77,7 @@ class ModuleOptions extends AbstractOptions
     {
         return $this->bootHookUrl;
     }
-    
+
     /**
      * Set bootHookUrl
      *
@@ -93,7 +90,7 @@ class ModuleOptions extends AbstractOptions
         $this->bootHookUrl = $bootHookUrl;
         return $this;
     }
-    
+
     /**
      * Get commandsPath
      *
@@ -103,7 +100,7 @@ class ModuleOptions extends AbstractOptions
     {
         return $this->commandsPath;
     }
-    
+
     /**
      * Set commandsPath
      *
@@ -116,7 +113,7 @@ class ModuleOptions extends AbstractOptions
         $this->commandsPath = $commandsPath;
         return $this;
     }
-    
+
     /**
      * Get telegramLog
      *
@@ -126,7 +123,7 @@ class ModuleOptions extends AbstractOptions
     {
         return $this->telegramLog;
     }
-    
+
     /**
      * Set telegramLog
      *
@@ -139,7 +136,7 @@ class ModuleOptions extends AbstractOptions
         $this->telegramLog = $telegramLog;
         return $this;
     }
-    
+
     /**
      * Get fileLog
      *
@@ -149,7 +146,7 @@ class ModuleOptions extends AbstractOptions
     {
         return $this->fileLog;
     }
-    
+
     /**
      * Set fileLog
      *
@@ -162,7 +159,7 @@ class ModuleOptions extends AbstractOptions
         $this->fileLog = $fileLog;
         return $this;
     }
-    
+
     /**
      * Get logger
      *
@@ -172,7 +169,7 @@ class ModuleOptions extends AbstractOptions
     {
         return $this->logger;
     }
-    
+
     /**
      * Set logger
      *
@@ -185,7 +182,7 @@ class ModuleOptions extends AbstractOptions
         $this->logger = $logger;
         return $this;
     }
-    
+
     /**
      * Get disableRouteSet
      *
@@ -195,7 +192,7 @@ class ModuleOptions extends AbstractOptions
     {
         return $this->disableRouteSet;
     }
-    
+
     /**
      * Set disableRouteSet
      *
@@ -208,6 +205,83 @@ class ModuleOptions extends AbstractOptions
         $this->disableRouteSet = $disableRouteSet;
         return $this;
     }
+    
+    /**
+     * @return mixed
+     */
+    public function getShowGreetingAfterResponse()
+    {
+        return $this->showGreetingAfterResponse;
+    }
+    
+    /**
+     * @param mixed $showGreetingAfterResponse
+     *
+     * @return ModuleOptions
+     */
+    public function setShowGreetingAfterResponse($showGreetingAfterResponse)
+    {
+        $this->showGreetingAfterResponse = $showGreetingAfterResponse;
+        return $this;
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function getTextOfGreeting()
+    {
+        return $this->textOfGreeting;
+    }
+    
+    /**
+     * @param mixed $textOfGreeting
+     *
+     * @return ModuleOptions
+     */
+    public function setTextOfGreeting($textOfGreeting)
+    {
+        $this->textOfGreeting = $textOfGreeting;
+        return $this;
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function getTextQuestion()
+    {
+        return $this->textQuestion;
+    }
+    
+    /**
+     * @param mixed $textQuestion
+     *
+     * @return ModuleOptions
+     */
+    public function setTextQuestion($textQuestion)
+    {
+        $this->textQuestion = $textQuestion;
+        return $this;
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function getAskQuestions()
+    {
+        return $this->askQuestions;
+    }
+    
+    /**
+     * @param mixed $askQuestions
+     *
+     * @return ModuleOptions
+     */
+    public function setAskQuestions($askQuestions)
+    {
+        $this->askQuestions = $askQuestions;
+        return $this;
+    }
+    
     
     
 }

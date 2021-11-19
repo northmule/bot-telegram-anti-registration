@@ -21,24 +21,22 @@ use Northmule\Telegram\Service\TelegramApi;
  */
 class GenericmessageCommand extends SystemCommand
 {
-    
+
     const NAME_COMMAND = 'genericmessage';
-    
+
     /**
      * @var string
      */
     protected $name = self::NAME_COMMAND;
-    
     /**
      * @var string
      */
     protected $description = 'Handle generic message';
-    
     /**
      * @var string
      */
     protected $version = '1.0.0';
-    
+
     /**
      * Main command execution
      *
@@ -52,37 +50,30 @@ class GenericmessageCommand extends SystemCommand
         $eventManager = $this->telegram->getServiceManager()->get(
             EventManager::class
         );
-        
+
         /** @var Message $message */
         $message = $this->getMessage();
-        
-        
+
+
         // Новый участник группы
         if ($message->getNewChatMembers()) {
             return $this->getTelegram()->executeCommand(NewchatmembersCommand::NAME_COMMAND);
         }
-        
+
         // Участник покинул группу
         if ($message->getLeftChatMember()) {
-            return $this->getTelegram()->executeCommand('leftchatmember');
+            return Request::deleteMessage(
+                [
+                    'chat_id'    => $message->getChat()->getId(),
+                    'message_id' => $message->getMessageId(),
+                ]
+            );
         }
-        
-        // The chat photo was changed
-        if ($new_chat_photo = $message->getNewChatPhoto()) {
-            // Whatever...
+
+        if ($message->getType() === 'text' && !empty($message->getText())) {
+            return $this->getTelegram()->executeCommand(CheckUserCommand::NAME_COMMAND);
         }
-        
-        // The chat title was changed
-        if ($new_chat_title = $message->getNewChatTitle()) {
-            // Whatever...
-        }
-        
-        // A message has been pinned
-        if ($pinned_message = $message->getPinnedMessage()) {
-            // Whatever...
-        }
-        
+
         return Request::emptyResponse();
     }
-    
 }

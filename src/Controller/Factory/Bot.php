@@ -2,7 +2,6 @@
 
 namespace Northmule\Telegram\Controller\Factory;
 
-
 use Exception;
 use Interop\Container\ContainerInterface;
 use Laminas\Form\FormElementManager\FormElementManagerV3Polyfill;
@@ -14,11 +13,12 @@ use Northmule\Telegram\Controller\Bot as BotController;
 use Northmule\Telegram\Options\ModuleOptions;
 use Northmule\Telegram\Service\TelegramApi;
 
-
 class Bot implements FactoryInterface
 {
-    
-    public function __invoke(ContainerInterface $container, $requestedName,
+
+    public function __invoke(
+        ContainerInterface $container,
+        $requestedName,
         array $options = null
     ) {
         /** @var ModuleOptions $options */
@@ -31,22 +31,21 @@ class Bot implements FactoryInterface
                 new Stream($options->getTelegramLog())
             );
         }
-        
+
         try {
             $telegram = $container->get(TelegramApi::class);
             $telegram->addCommandsPaths($options->getCommandsPath());
         } catch (TelegramException $e) {
             throw new Exception($e);
         }
-        
-        
+
+
         $class = new BotController(
             $serviceManager,
             $logger,
             $telegram
         );
-        
+
         return $class;
     }
-    
 }

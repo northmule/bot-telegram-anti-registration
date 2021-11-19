@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Northmule\Telegram\Controller;
 
-
 use Laminas\Log\Logger;
 use Laminas\Log\Writer\Stream;
 use Laminas\Mvc\Controller\AbstractActionController;
@@ -13,27 +12,23 @@ use Laminas\View\Model\JsonModel;
 use Northmule\Telegram\Options\ModuleOptions;
 use Northmule\Telegram\Service\TelegramApi;
 
-
 class Bot extends AbstractActionController
 {
-    
-    
+
+
     /**
      * @var ServiceManager
      */
     protected ServiceManager $serviceManager;
-    
     /**
      * @var Logger
      */
     protected Logger $logger;
-    
     /**
      * @var TelegramApi
      */
     protected TelegramApi $telegram;
-    
-    
+
     /**
      * Categorys constructor.
      *
@@ -49,13 +44,12 @@ class Bot extends AbstractActionController
         $this->serviceManager = $serviceManager;
         $this->logger = $logger;
         $this->telegram = $telegram;
-        
     }
-    
-    
-    public function echoAction()
+
+
+    public function echoAction(): JsonModel
     {
-        
+        /** @var \Northmule\Telegram\Options\ModuleOptions $options */
         $options = $this->serviceManager->get(ModuleOptions::class);
         $this->logger->info(
             'Telegram данные: ' . $this->getRequest()->getContent()
@@ -69,7 +63,8 @@ class Bot extends AbstractActionController
                 new Stream($options->getFileLog())
             );
             $this->logger->err(
-                'Возникло исключение: ' . $e->getMessage(), [$e->getTrace()]
+                'Возникло исключение: ' . $e->getMessage(),
+                [$e->getTrace()]
             );
             $viewResult = 'error';
         } finally {
@@ -82,11 +77,8 @@ class Bot extends AbstractActionController
             $this->getResponse()->setHeaders(
                 $headers->addHeaders(['Content-Type' => 'application/json'])
             );
-            
+
             return $view;
         }
-        
     }
-    
-    
 }
