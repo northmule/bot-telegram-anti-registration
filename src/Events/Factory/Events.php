@@ -31,6 +31,6 @@ class Events implements FactoryInterface
             );
         }
 
-        return new EventsService($serviceManager, $logger);
+        return new EventsService($serviceManager, $logger, $options);
     }
 }

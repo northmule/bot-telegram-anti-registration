@@ -17,6 +17,7 @@ use Longman\TelegramBot\Entities\User as UserEntities;
 use Longman\TelegramBot\Request;
 use Northmule\Telegram\Map\Events as EventsMap;
 use Northmule\Telegram\Map\QuestionKeyboard;
+use Northmule\Telegram\Options\ModuleOptions;
 use Northmule\Telegram\Service\KeyboardQuestion;
 use Northmule\Telegram\Service\TelegramRestrict;
 
@@ -24,6 +25,8 @@ use function count;
 
 class Events
 {
+    /** @var string  */
+    const MASK_USER_NAME = '#user_name#';
 
     /**
      * @var ServiceManager
@@ -33,19 +36,24 @@ class Events
      * @var Logger
      */
     protected Logger $logger;
-
+    
+    protected ModuleOptions $options;
+    
     /**
      * Events constructor.
      *
      * @param ServiceManager $serviceManager
      * @param Logger         $logger
+     * @param ModuleOptions  $options
      */
     public function __construct(
         ServiceManager $serviceManager,
-        Logger $logger
+        Logger $logger,
+        ModuleOptions $options
     ) {
         $this->serviceManager = $serviceManager;
         $this->logger = $logger;
+        $this->options = $options;
     }
 
 
@@ -108,13 +116,15 @@ class Events
                         'message_id' => $message->getMessageId(),
                     ]
                 );
-
-                // Отправляем сообщение
-//                return Request::sendMessage([
-//                    'chat_id'              => $message->getChat()->getId(),
-//                    'text'                 => "Добро пожаловать!",
-//                    'disable_notification' => true,
-//                ]);
+    
+                if ($this->options->getShowGreetingAfterResponse() && !empty($this->options->getTextOfGreeting())) {
+                    // Отправляем сообщение
+                    return Request::sendMessage([
+                        'chat_id'              => $message->getChat()->getId(),
+                        'text'                 => $this->options->getTextOfGreeting(),
+                        'disable_notification' => true,
+                    ]);
+                }
             }
         } catch (\Throwable $e) {
             $this->logger->err($e->getMessage(), $e->getTrace());
@@ -180,17 +190,23 @@ class Events
             if ($memberIsBot === true) {
                 Request::emptyResponse();
             }
+            if ($this->options->getAskQuestions() === true) {
+                $sendText = str_replace(self::MASK_USER_NAME, implode(', ', $member_names), $this->options->getTextQuestion());
+                return Request::sendMessage(
+                    array_merge([
+                        'chat_id'              => $message->getChat()->getId(),
+                        'text'                 => $sendText,
+                        'disable_notification' => true,
+                    ], $question)
+                );
+            } else { // Снимаем ограничение (предполагаем что боты отсекаются по умолчанию)
+                // Снимаем ограничения
+                $restrictionService->unsetRestrict(
+                    $message->getChat()->getId(),
+                    $message->getFrom()->getId(),
+                );
+            }
 
-            return Request::sendMessage(
-                array_merge([
-                    'chat_id'              => $message->getChat()->getId(),
-                    'text'                 => 'Привет! ' . implode(
-                        ', ',
-                        $member_names
-                    ) . '! Скажи, кто ты?',
-                    'disable_notification' => true,
-                ], $question)
-            );
         } catch (\Throwable $e) {
             $this->logger->err($e->getMessage(), $e->getTrace());
         }

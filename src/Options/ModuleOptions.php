@@ -17,6 +17,10 @@ class ModuleOptions extends AbstractOptions
     protected $fileLog;
     protected $logger;
     protected $disableRouteSet;
+    protected $showGreetingAfterResponse;
+    protected $textOfGreeting;
+    protected $textQuestion;
+    protected $askQuestions;
 
     /**
      * Get apiKey
@@ -201,4 +205,83 @@ class ModuleOptions extends AbstractOptions
         $this->disableRouteSet = $disableRouteSet;
         return $this;
     }
+    
+    /**
+     * @return mixed
+     */
+    public function getShowGreetingAfterResponse()
+    {
+        return $this->showGreetingAfterResponse;
+    }
+    
+    /**
+     * @param mixed $showGreetingAfterResponse
+     *
+     * @return ModuleOptions
+     */
+    public function setShowGreetingAfterResponse($showGreetingAfterResponse)
+    {
+        $this->showGreetingAfterResponse = $showGreetingAfterResponse;
+        return $this;
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function getTextOfGreeting()
+    {
+        return $this->textOfGreeting;
+    }
+    
+    /**
+     * @param mixed $textOfGreeting
+     *
+     * @return ModuleOptions
+     */
+    public function setTextOfGreeting($textOfGreeting)
+    {
+        $this->textOfGreeting = $textOfGreeting;
+        return $this;
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function getTextQuestion()
+    {
+        return $this->textQuestion;
+    }
+    
+    /**
+     * @param mixed $textQuestion
+     *
+     * @return ModuleOptions
+     */
+    public function setTextQuestion($textQuestion)
+    {
+        $this->textQuestion = $textQuestion;
+        return $this;
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function getAskQuestions()
+    {
+        return $this->askQuestions;
+    }
+    
+    /**
+     * @param mixed $askQuestions
+     *
+     * @return ModuleOptions
+     */
+    public function setAskQuestions($askQuestions)
+    {
+        $this->askQuestions = $askQuestions;
+        return $this;
+    }
+    
+    
+    
 }
