@@ -1,5 +1,9 @@
 <?php
-/** @var \Laminas\View\Renderer\PhpRenderer $this */
+/** @var PhpRenderer $this */
 
 
-echo $this->json($this->response,['enableJsonExprFinder'=>true,'keepLayouts' => false]);
+use Laminas\View\Renderer\PhpRenderer;
+
+echo $this->json(
+    $this->response, ['enableJsonExprFinder' => true, 'keepLayouts' => false]
+);
