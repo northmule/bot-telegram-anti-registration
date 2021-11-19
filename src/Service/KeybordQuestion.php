@@ -16,25 +16,23 @@ use Northmule\Telegram\Map\QuestionKeyboard as QuestionKeyboardMap;
  */
 class KeybordQuestion
 {
-    
+
     protected $curentUserId = '';
-    
+
     /**
      * Вернёт клавиатуру с вопросом для пользователя
      * @return array [reply_markup => InlineKeyboard]
      */
     public function getQuestion()
     {
-        
         $keyboard = new InlineKeyboard([
-            ['text' => 'Я бот!', 'callback_data' => QuestionKeyboardMap::CALLBACK_ANSWER_BOT.$this->curentUserId],
-            ['text' => 'Я человек!', 'callback_data' => QuestionKeyboardMap::CALLBACK_ANSWER_HUMAN.$this->curentUserId],
+            ['text' => 'Я бот!', 'callback_data' => QuestionKeyboardMap::CALLBACK_ANSWER_BOT . $this->curentUserId],
+            ['text' => 'Я человек!', 'callback_data' => QuestionKeyboardMap::CALLBACK_ANSWER_HUMAN . $this->curentUserId],
         ]);
-        
+
         return ['reply_markup' => $keyboard];
-        
     }
-    
+
     /**
      * Set curentUserId
      *
@@ -47,5 +45,4 @@ class KeybordQuestion
         $this->curentUserId = $curentUserId;
         return $this;
     }
-    
 }

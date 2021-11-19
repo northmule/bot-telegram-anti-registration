@@ -12,15 +12,14 @@ use Longman\TelegramBot\Request;
 use Northmule\Telegram\Map\Events;
 
 /**
- * Команда вызывается когда в группу вступает новый участник
- * Class NewchatmembersCommand
+ * Class CheckUserCommand
  *
  * @package Northmule\Telegram\Commands
  */
-class NewchatmembersCommand extends SystemCommand
+class CheckuserCommand extends SystemCommand
 {
     /** @var string  */
-    const NAME_COMMAND = 'newchatmembers';
+    const NAME_COMMAND = 'checkuser';
 
     /**
      * @var string
@@ -29,11 +28,11 @@ class NewchatmembersCommand extends SystemCommand
     /**
      * @var string
      */
-    protected $description = 'New Chat Members';
+    protected $description = 'Check user';
     /**
      * @var string
      */
-    protected $version = '1.3.0';
+    protected $version = '1.0.0';
 
     /**
      * Main command execution
@@ -48,13 +47,11 @@ class NewchatmembersCommand extends SystemCommand
             EventManager::class
         );
         $message = $this->getMessage();
-        /** @var array $members */
-        $members = $message->getNewChatMembers();
 
         $eventManager->trigger(
-            Events::NEW_USER_SENT_REQUEST_TO_JOIN_GROUP,
+            Events::NEW_CHAT_MESSAGE_FROM_A_USER,
             null,
-            ['message' => $message, 'members' => $members]
+            ['message' => $message]
         );
 
         return Request::emptyResponse();

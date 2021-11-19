@@ -16,21 +16,21 @@ use Longman\TelegramBot\Telegram;
  */
 class TelegramApi extends Telegram
 {
-    
+
     /**
      * @var ServiceManager
      */
-    protected $serviceManager;
+    protected ServiceManager $serviceManager;
     /**
      * @var Logger
      */
-    protected $logger;
-    
+    protected Logger $logger;
+
     public function __construct($api_key, $bot_username = '')
     {
         parent::__construct($api_key, $bot_username);
     }
-    
+
     /**
      * Get serviceManager
      *
@@ -40,7 +40,7 @@ class TelegramApi extends Telegram
     {
         return $this->serviceManager;
     }
-    
+
     /**
      * Set serviceManager
      *
@@ -48,12 +48,12 @@ class TelegramApi extends Telegram
      *
      * @return TelegramApi
      */
-    public function setServiceManager(ServiceManager $serviceManager
-    ): TelegramApi {
+    public function setServiceManager(ServiceManager $serviceManager): TelegramApi
+    {
         $this->serviceManager = $serviceManager;
         return $this;
     }
-    
+
     /**
      * Get logger
      *
@@ -63,7 +63,7 @@ class TelegramApi extends Telegram
     {
         return $this->logger;
     }
-    
+
     /**
      * Set logger
      *
@@ -76,8 +76,4 @@ class TelegramApi extends Telegram
         $this->logger = $logger;
         return $this;
     }
-    
-
-    
-    
 }
