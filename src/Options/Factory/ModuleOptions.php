@@ -20,7 +20,7 @@ class ModuleOptions implements FactoryInterface
         $moduleConfig = array_merge(
             [],
             $appConfig['telegramBot'] ?? [],
-            $appConfig['telegramBot']['logger'] ?? []
+            $appConfig['telegramBot']['logger'] ?? [],
         );
         return new Options($moduleConfig);
     }

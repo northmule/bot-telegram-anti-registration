@@ -219,7 +219,7 @@ class ModuleOptions extends AbstractOptions
      *
      * @return ModuleOptions
      */
-    public function setShowGreetingAfterResponse($showGreetingAfterResponse)
+    public function setShowGreetingAfterResponse($showGreetingAfterResponse): ModuleOptions
     {
         $this->showGreetingAfterResponse = $showGreetingAfterResponse;
         return $this;
@@ -238,7 +238,7 @@ class ModuleOptions extends AbstractOptions
      *
      * @return ModuleOptions
      */
-    public function setTextOfGreeting($textOfGreeting)
+    public function setTextOfGreeting($textOfGreeting): ModuleOptions
     {
         $this->textOfGreeting = $textOfGreeting;
         return $this;
@@ -257,7 +257,7 @@ class ModuleOptions extends AbstractOptions
      *
      * @return ModuleOptions
      */
-    public function setTextQuestion($textQuestion)
+    public function setTextQuestion($textQuestion): ModuleOptions
     {
         $this->textQuestion = $textQuestion;
         return $this;
@@ -276,7 +276,7 @@ class ModuleOptions extends AbstractOptions
      *
      * @return ModuleOptions
      */
-    public function setAskQuestions($askQuestions)
+    public function setAskQuestions($askQuestions): ModuleOptions
     {
         $this->askQuestions = $askQuestions;
         return $this;

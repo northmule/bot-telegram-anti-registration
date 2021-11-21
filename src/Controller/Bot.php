@@ -52,7 +52,7 @@ class Bot extends AbstractActionController
         /** @var \Northmule\Telegram\Options\ModuleOptions $options */
         $options = $this->serviceManager->get(ModuleOptions::class);
         $this->logger->info(
-            'Telegram данные: ' . $this->getRequest()->getContent()
+            'Telegram request: ' . $this->getRequest()->getContent()
         );
         $viewResult = 'ok';
         try {

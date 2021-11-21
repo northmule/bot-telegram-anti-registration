@@ -18,7 +18,7 @@ use Longman\TelegramBot\Request;
 use Northmule\Telegram\Map\Events as EventsMap;
 use Northmule\Telegram\Map\QuestionKeyboard;
 use Northmule\Telegram\Options\ModuleOptions;
-use Northmule\Telegram\Service\KeyboardQuestion;
+use Northmule\Telegram\Service\KeyboardQuestion as KeyboardQuestionService;
 use Northmule\Telegram\Service\TelegramRestrict;
 
 use function count;
@@ -151,9 +151,8 @@ class Events
         if ($this->isValidEvent($event, ['message' => Message::class]) === false) {
             return Request::emptyResponse();
         }
-
-        /** @var KeyboardQuestion $keybord */
-        $keybord = $this->serviceManager->get(KeyboardQuestion::class);
+        /** @var KeyboardQuestionService $keybord */
+        $keybord = $this->serviceManager->get(KeyboardQuestionService::class);
         $keybord->setCurentUserId((string) $message->getFrom()->getId());
         /** @var  TelegramRestrict $restrictionService */
         $restrictionService = $this->serviceManager->get(
@@ -166,7 +165,6 @@ class Events
                 $message->getChat()->getId(),
                 $message->getFrom()->getId()
             );
-
             $member_names = [];
             $memberIsBot = false;
             /** @var UserEntities $member */
@@ -176,7 +174,6 @@ class Events
                     $memberIsBot = $member->getIsBot();
                 }
             }
-
             if ($message->getType() === 'new_chat_members') {
                 // Удаление сообщения о вступившем
                 Request::deleteMessage(
@@ -207,7 +204,7 @@ class Events
                 );
             }
 
-        } catch (\Throwable $e) {
+        } catch (\Exception $e) {
             $this->logger->err($e->getMessage(), $e->getTrace());
         }
         return Request::emptyResponse();
